@@ -1,0 +1,9 @@
+(library
+ (name hwlib)
+ (wrapped false)
+ (modules rsa))
+
+(executable
+ (name main)
+ (modules main)
+ (libraries str hwlib))

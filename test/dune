@@ -1,0 +1,47 @@
+(rule
+ (targets rsa1-keygen.output)
+ (action
+  (with-stdout-to
+   %{targets}
+   (run ../rsa keygen 100))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff rsa1-keygen.expected rsa1-keygen.output)))
+
+(rule
+ (targets rsa1-enc.output)
+ (action
+  (with-stdout-to
+   %{targets}
+   (run ../rsa enc 5 8633 1234))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff rsa1-enc.expected rsa1-enc.output)))
+
+(rule
+ (targets rsa1-dec.output)
+ (action
+  (with-stdout-to
+   %{targets}
+   (run ../rsa dec 5069 8633 12))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff rsa1-dec.expected rsa1-dec.output)))
+
+(rule
+ (targets rsa1-crack.output)
+ (action
+  (with-stdout-to
+   %{targets}
+   (run ../rsa crack 5 8633 12))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff rsa1-dec.expected rsa1-crack.output)))
